@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import LoginPage from './components/LoginPage';
-import MainPage from './components/MainPage';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
 
 const App = () => {
   const [loggedInFloor, setLoggedInFloor] = useState(null);

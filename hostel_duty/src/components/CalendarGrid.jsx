@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import './CalendarGrid.css';
 
+const availableRooms = {
+  1: Array.from({ length: 14 }, (_, i) => i + 101),
+  2: Array.from({ length: 14 }, (_, i) => i + 201),
+  3: Array.from({ length: 14 }, (_, i) => i + 301),
+  4: Array.from({ length: 14 }, (_, i) => i + 401),
+  5: Array.from({ length: 14 }, (_, i) => i + 501),
+};
+
 const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
   const daysInMonth = new Date(2024, selectedMonth + 1, 0).getDate();
   const [dutyAssignments, setDutyAssignments] = useState({});

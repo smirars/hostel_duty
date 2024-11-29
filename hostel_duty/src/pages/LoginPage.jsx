@@ -9,7 +9,7 @@ const floorAccessCodes = {
   5: 'code5',
 };
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin }) => {
   const [accessCode, setAccessCode] = useState('');
     
   const handleLogin = () => {
