@@ -15,7 +15,7 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
   const [dutyAssignments, setDutyAssignments] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [modalType, setModalType] = useState('assign'); // 'assign' или 'accept'
+  const [modalType, setModalType] = useState('assign'); 
 
   const handleDayClick = (day) => {
     setSelectedDay(day);
@@ -26,32 +26,32 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
 
   const assignRoom = (room) => {
     const dayKey = `${selectedMonth}-${selectedFloor}-${selectedDay}`;
-
+  
     if (!availableRooms[selectedFloor].includes(parseInt(room))) {
       alert('Комнаты нет на этом этаже!');
       return;
     }
-
-    const twoWeeksRange = Array.from({ length: 14 }, (_, i) => selectedDay + i).filter(
-      (d) => d <= daysInMonth
-    );
-
-    const isRoomOccupied = twoWeeksRange.some((d) => {
+  
+    const weekRange = Array.from({ length: 15 }, (_, i) => selectedDay - 7 + i)
+      .filter((d) => d > 0 && d <= daysInMonth); 
+  
+    const isRoomOccupied = weekRange.some((d) => {
       const key = `${selectedMonth}-${selectedFloor}-${d}`;
       return dutyAssignments[key]?.room === room;
     });
-
+  
     if (isRoomOccupied) {
-      alert('Комната занята на ближайшие две недели!');
+      alert('Комната занята в диапазоне ±1 недели!');
       return;
     }
-
+  
     setDutyAssignments((prev) => ({
       ...prev,
       [dayKey]: { room, status: 'pending' },
     }));
     setModalOpen(false);
   };
+  
 
   const updateDutyStatus = (status) => {
     const dayKey = `${selectedMonth}-${selectedFloor}-${selectedDay}`;
