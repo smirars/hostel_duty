@@ -5,7 +5,6 @@ import './CalendarGrid.css';
 const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
   const daysInMonth = new Date(2024, selectedMonth + 1, 0).getDate();
   const [dutyAssignments, setDutyAssignments] = useState({});
-
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
 
@@ -16,13 +15,20 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
 
   const assignRoom = (room) => {
     const dayKey = `${selectedMonth}-${selectedFloor}-${selectedDay}`;
-    if (Object.values(dutyAssignments).includes(room)) {
-      alert('Комната уже назначена на другой день!');
+    if (!availableRooms[selectedFloor].includes(parseInt(room))) {
+      alert('Комнаты нет на этом этаже!');
       return;
     }
+
+    const twoWeeks = Array.from({ length: 14 }, (_, i) => selectedDay + i);
+    if (twoWeeks.some((d) => dutyAssignments[`${selectedMonth}-${selectedFloor}-${d}`] === room)) {
+      alert('Комната занята на ближайшие две недели!');
+      return;
+    }
+
     setDutyAssignments((prev) => ({
       ...prev,
-      [dayKey]: room,
+      [dayKey]: { room, status: 'pending' },
     }));
     setModalOpen(false);
   };
@@ -31,16 +37,30 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
     <div className="calendar-grid">
       {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
         const dayKey = `${selectedMonth}-${selectedFloor}-${day}`;
+        const assignment = dutyAssignments[dayKey];
         return (
           <div
             key={day}
             className="calendar-day"
-            onClick={() => !dutyAssignments[dayKey] && handleDayClick(day)}
+            onClick={() => handleDayClick(day)}
           >
             <div className="day-number">{day}</div>
-            <div className="room-number">
-              {dutyAssignments[dayKey] ? `Комн. ${dutyAssignments[dayKey]}` : ''}
-            </div>
+            {assignment && (
+              <>
+                <div className="room-number">Комн. {assignment.room}</div>
+                <div
+                  className="status-indicator"
+                  style={{
+                    backgroundColor:
+                      assignment.status === 'accepted'
+                        ? 'green'
+                        : assignment.status === 'rejected'
+                        ? 'red'
+                        : 'yellow',
+                  }}
+                />
+              </>
+            )}
           </div>
         );
       })}
@@ -56,4 +76,5 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
 };
 
 export default CalendarGrid;
+
 

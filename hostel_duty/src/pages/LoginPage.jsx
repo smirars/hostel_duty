@@ -11,16 +11,17 @@ const floorAccessCodes = {
 
 const LoginPage = () => {
   const [accessCode, setAccessCode] = useState('');
-    const handleLogin = () => {
-      const floor = Object.keys(floorAccessCodes).find(
-        (key) => floorAccessCodes[key] === accessCode
-      );
-      if (floor) {
-        onLogin(parseInt(floor));
-      } else {
-        alert('Неверный код доступа!');
-      }
-    };
+    
+  const handleLogin = () => {
+    const floor = Object.keys(floorAccessCodes).find(
+      (key) => floorAccessCodes[key] === accessCode
+    );
+    if (floor) {
+      onLogin(parseInt(floor));
+    } else {
+      alert('Неверный код доступа!');
+    }
+  };
 
   return (
     <div className="login-page">
