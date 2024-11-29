@@ -15,21 +15,33 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
   const [dutyAssignments, setDutyAssignments] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [modalType, setModalType] = useState('assign'); // 'assign' или 'accept'
 
   const handleDayClick = (day) => {
     setSelectedDay(day);
+    const dayKey = `${selectedMonth}-${selectedFloor}-${day}`;
+    setModalType(dutyAssignments[dayKey] ? 'accept' : 'assign');
     setModalOpen(true);
   };
 
   const assignRoom = (room) => {
     const dayKey = `${selectedMonth}-${selectedFloor}-${selectedDay}`;
+
     if (!availableRooms[selectedFloor].includes(parseInt(room))) {
       alert('Комнаты нет на этом этаже!');
       return;
     }
 
-    const twoWeeks = Array.from({ length: 14 }, (_, i) => selectedDay + i);
-    if (twoWeeks.some((d) => dutyAssignments[`${selectedMonth}-${selectedFloor}-${d}`] === room)) {
+    const twoWeeksRange = Array.from({ length: 14 }, (_, i) => selectedDay + i).filter(
+      (d) => d <= daysInMonth
+    );
+
+    const isRoomOccupied = twoWeeksRange.some((d) => {
+      const key = `${selectedMonth}-${selectedFloor}-${d}`;
+      return dutyAssignments[key]?.room === room;
+    });
+
+    if (isRoomOccupied) {
       alert('Комната занята на ближайшие две недели!');
       return;
     }
@@ -37,6 +49,15 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
     setDutyAssignments((prev) => ({
       ...prev,
       [dayKey]: { room, status: 'pending' },
+    }));
+    setModalOpen(false);
+  };
+
+  const updateDutyStatus = (status) => {
+    const dayKey = `${selectedMonth}-${selectedFloor}-${selectedDay}`;
+    setDutyAssignments((prev) => ({
+      ...prev,
+      [dayKey]: { ...prev[dayKey], status },
     }));
     setModalOpen(false);
   };
@@ -75,8 +96,11 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
       {modalOpen && (
         <Modal
           day={selectedDay}
+          type={modalType}
+          assignment={dutyAssignments[`${selectedMonth}-${selectedFloor}-${selectedDay}`]}
           onClose={() => setModalOpen(false)}
           onSave={assignRoom}
+          onUpdate={updateDutyStatus}
         />
       )}
     </div>
@@ -84,5 +108,7 @@ const CalendarGrid = ({ selectedMonth, selectedFloor }) => {
 };
 
 export default CalendarGrid;
+
+
 
 

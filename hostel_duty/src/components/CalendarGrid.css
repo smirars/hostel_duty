@@ -1,32 +1,46 @@
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 100px);
-    gap: 10px;
-    margin-right: 20px;
-  }
-  
-  .calendar-day {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .day-number {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 12px;
-    color: #333;
-  }
-  
-  .room-number {
-    font-size: 14px;
-    color: #000;
-  }
+  display: grid;
+  grid-template-columns: repeat(7, 50px);
+  gap: 5px;
+}
+
+.calendar-day {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.calendar-day:hover {
+  background-color: #f0f0f0;
+}
+
+.day-number {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 10px;
+  color: #555;
+}
+
+.room-number {
+  font-size: 12px;
+  color: #333;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
   
