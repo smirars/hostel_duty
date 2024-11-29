@@ -1,17 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import MainPage from './pages/MainPage';
+import React, { useState } from 'react';
+import LoginPage from './components/LoginPage';
+import MainPage from './components/MainPage';
 
-function App() {
+const App = () => {
+  const [loggedInFloor, setLoggedInFloor] = useState(null);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/main" element={<MainPage />} />
-      </Routes>
-    </Router>
+    <div className="app">
+      {loggedInFloor === null ? (
+        <LoginPage onLogin={setLoggedInFloor} />
+      ) : (
+        <MainPage floor={loggedInFloor} />
+      )}
+    </div>
   );
-}
+};
 
 export default App;
