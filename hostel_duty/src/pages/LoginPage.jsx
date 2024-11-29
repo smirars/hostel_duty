@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 // import './LoginPage.css';
+
+const floorAccessCodes = {
+  1: 'code1',
+  2: 'code2',
+  3: 'code3',
+  4: 'code4',
+  5: 'code5',
+};
 
 const LoginPage = () => {
   const [accessCode, setAccessCode] = useState('');
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    if (accessCode === '1234') {
-      navigate('/main'); 
-    } else {
-      alert('Неверный код доступа');
-    }
-  };
+    const handleLogin = () => {
+      const floor = Object.keys(floorAccessCodes).find(
+        (key) => floorAccessCodes[key] === accessCode
+      );
+      if (floor) {
+        onLogin(parseInt(floor));
+      } else {
+        alert('Неверный код доступа!');
+      }
+    };
 
   return (
     <div className="login-page">
