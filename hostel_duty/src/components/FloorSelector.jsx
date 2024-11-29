@@ -1,14 +1,15 @@
 import React from 'react';
 import './FloorSelector.css';
 
-const FloorSelector = ({ selectedFloor, onFloorChange }) => {
+const FloorSelector = ({ selectedFloor, onSelectFloor, loggedInFloor }) => {
   return (
     <div className="floor-selector">
       {Array.from({ length: 5 }, (_, i) => i + 1).map((floor) => (
         <button
           key={floor}
-          className={selectedFloor === floor ? 'active' : ''}
-          onClick={() => onFloorChange(floor)}
+          onClick={() => onSelectFloor(floor)}
+          disabled={loggedInFloor !== floor}
+          className={loggedInFloor === floor ? 'accessible' : 'disabled'}
         >
           Этаж {floor}
         </button>
