@@ -28,7 +28,7 @@ const LoginPage = ({ onLogin }) => {
       <h1>
         <svg viewBox="0 0 100 20" className="title-svg">
           <text x="10" y="15" fontSize="10" fill="blue">
-            hostel duty
+            mtuci duty
           </text>
         </svg>
       </h1>
