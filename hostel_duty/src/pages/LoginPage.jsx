@@ -38,7 +38,7 @@ const LoginPage = ({ onLogin }) => {
         value={accessCode}
         onChange={(e) => setAccessCode(e.target.value)}
       />
-      <button onClick={handleLogin}>Войти</button>
+      <button className="button__loginPage" onClick={handleLogin}>Войти</button>
     </div>
   );
 };

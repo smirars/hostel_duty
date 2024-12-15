@@ -49,7 +49,7 @@ body {
     outline: none;
   }
   
-  button {
+  .button__loginPage {
     width: 100%;
     padding: 10px;
     background-color: #2575fc;
@@ -61,7 +61,7 @@ body {
     transition: background-color 0.3s ease;
   }
   
-  button:hover {
+  .button__loginPage:hover {
     background-color: #1d5ed9;
   }
   
