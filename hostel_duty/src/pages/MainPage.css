@@ -1,3 +1,7 @@
+body {
+  background: white;
+}
+
 .main-page {
     display: flex;
     flex-direction: column;
