@@ -10,7 +10,7 @@
   border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
   background-color: #fff;
@@ -30,17 +30,18 @@
 }
 
 .room-number {
-  font-size: 12px;
+  font-size: 14px;
   color: #333;
+  text-align: center;
 }
 
 .status-indicator {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  top: 7px;
+  right: 7px;
 }
 
   
