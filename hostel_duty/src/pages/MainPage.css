@@ -4,8 +4,68 @@
     align-items: center;
   }
   
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .header button {
+    padding: 10px;
+    margin: 0 10px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .header button:hover {
+    background-color: #1d5ed9;
+  }
+  
+  .header h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
   .content {
     display: flex;
     margin-top: 20px;
+    align-items: flex-start;
   }
+  
+  .calendar-grid {
+    flex: 3;
+    margin-right: 20px;
+  }
+  
+  .floor-selector {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .floor-selector button {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .floor-selector button:hover {
+    background-color: #1d5ed9;
+  }
+  
   
